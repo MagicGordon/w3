@@ -86,7 +86,7 @@ const main = async() => {
         mintToAliceTransaction.feePayer = aliceWallet.publicKey;
         const transactionId = await sendAndConfirmTransaction(solanaConnection, mintToAliceTransaction, [aliceWallet]);
         console.log(`Transaction ID: `, transactionId);
-        console.log(`Succesfully minted ${10} ${mintKeypair.publicKey} to ${aliceWallet.publicKey.toString()}.`);
+        console.log(`Succesfully minted ${10} ${mintKeypair.publicKey} to ${aliceTokenATA.toString()}.`);
         
     }
     await sleep(15000)
@@ -100,7 +100,7 @@ const main = async() => {
         transferToBobTransaction.feePayer = aliceWallet.publicKey;
         const transactionId = await sendAndConfirmTransaction(solanaConnection, transferToBobTransaction, [aliceWallet]);
         console.log(`Transaction ID: `, transactionId);
-        console.log(`Succesfully from ${aliceWallet.publicKey.toString()} transfer ${1} ${mintKeypair.publicKey} to ${bobWallet.publicKey.toString()}.`);
+        console.log(`Succesfully from ${aliceTokenATA.toString()} transfer ${1} ${mintKeypair.publicKey} to ${bobTokenATA.toString()}.`);
     }
     await sleep(15000)
 

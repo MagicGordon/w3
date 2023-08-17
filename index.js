@@ -86,7 +86,7 @@ const main = async () => {
         mintToAliceTransaction.feePayer = aliceWallet.publicKey;
         const transactionId = await (0, web3_js_1.sendAndConfirmTransaction)(solanaConnection, mintToAliceTransaction, [aliceWallet]);
         console.log(`Transaction ID: `, transactionId);
-        console.log(`Succesfully minted ${10} ${mintKeypair.publicKey} to ${aliceWallet.publicKey.toString()}.`);
+        console.log(`Succesfully minted ${10} ${mintKeypair.publicKey} to ${aliceTokenATA.toString()}.`);
     }
     await sleep(15000);
     solanaConnection.getTokenAccountBalance(aliceTokenATA).then((balance) => {
@@ -99,58 +99,9 @@ const main = async () => {
         transferToBobTransaction.feePayer = aliceWallet.publicKey;
         const transactionId = await (0, web3_js_1.sendAndConfirmTransaction)(solanaConnection, transferToBobTransaction, [aliceWallet]);
         console.log(`Transaction ID: `, transactionId);
-        console.log(`Succesfully from ${aliceWallet.publicKey.toString()} transfer ${1} ${mintKeypair.publicKey} to ${bobWallet.publicKey.toString()}.`);
+        console.log(`Succesfully from ${aliceTokenATA.toString()} transfer ${1} ${mintKeypair.publicKey} to ${bobTokenATA.toString()}.`);
     }
     await sleep(15000);
-    // let allTransaction = new Transaction().add(
-    //   SystemProgram.createAccount({
-    //       fromPubkey: aliceWallet.publicKey,
-    //       newAccountPubkey: mintKeypair.publicKey,
-    //       space: MINT_SIZE,
-    //       lamports: requiredBalance,
-    //       programId: TOKEN_PROGRAM_ID,
-    //   }),
-    //   createInitializeMintInstruction(
-    //     mintKeypair.publicKey, //Mint Address
-    //     6, //Number of Decimals of New mint
-    //     aliceWallet.publicKey, //Mint Authority
-    //     aliceWallet.publicKey, //Freeze Authority
-    //     TOKEN_PROGRAM_ID),
-    //   createAssociatedTokenAccountInstruction(
-    //     aliceWallet.publicKey, //Payer 
-    //     aliceTokenATA, //Associated token account 
-    //     aliceWallet.publicKey, //token owner
-    //     mintKeypair.publicKey, //Mint
-    //   ),
-    //   createMintToInstruction(
-    //     mintKeypair.publicKey, //Mint
-    //     aliceTokenATA, //Destination Token Account
-    //     aliceWallet.publicKey, //Authority
-    //     10 * Math.pow(10, 6),//number of tokens
-    //   ),
-    //   createAssociatedTokenAccountInstruction(
-    //     aliceWallet.publicKey, //Payer 
-    //     bobTokenATA, //Associated token account 
-    //     bobWallet.publicKey, //token owner
-    //     mintKeypair.publicKey, //Mint
-    //   ),
-    //   createTransferInstruction(
-    //     aliceTokenATA, //Source account
-    //     bobTokenATA, //Destination account
-    //     aliceWallet.publicKey, //Owner of the source account
-    //     1 * Math.pow(10, 6),//number of tokens
-    //   ),
-    // );
-    // {
-    //   let { lastValidBlockHeight, blockhash } = await solanaConnection.getLatestBlockhash('finalized');
-    //   allTransaction.recentBlockhash = blockhash;
-    //   allTransaction.lastValidBlockHeight = lastValidBlockHeight;
-    //   allTransaction.feePayer = aliceWallet.publicKey;
-    //   const transactionId = await sendAndConfirmTransaction(solanaConnection, allTransaction, [aliceWallet, mintKeypair]);
-    //   console.log(`Transaction ID: `, transactionId);
-    //   console.log(`Succesfully all.`);
-    // }
-    // await sleep(10000)
     solanaConnection.getTokenAccountBalance(aliceTokenATA).then((balance) => {
         console.log(`Alice current token balance: `, balance);
     });
